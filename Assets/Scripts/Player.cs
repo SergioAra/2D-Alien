@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject bullet;
     
+    [SerializeField] private float fireDelay = 1;
+
+    private float lastFireTime = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +50,16 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //delay
+            Fire();
+        }
+    }
+
+    void Fire()
+    {
+        if (Time.time > fireDelay + lastFireTime)
+        {
             Instantiate(bullet, transform.position, transform.rotation);
+            lastFireTime = Time.time;
         }
     }
 }

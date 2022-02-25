@@ -46,6 +46,17 @@ public class Animal : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("hit with " + col.gameObject.name);
+        if (col.gameObject.tag == "Bullet")
+        {
+            if (Health - 1 <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Health--;
+            }
+        }
+        
     }
 }
