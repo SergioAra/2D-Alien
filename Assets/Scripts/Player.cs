@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
 
     private float minX, minY, maxX, maxY, startChargedTime, holdTime;
 
-    private bool chargedShot, spacePressed;
+    private bool chargedShot, chargeReady;
     
     private SpriteRenderer mySprite;
 
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         maxY = topRightCorner.y - mySprite.bounds.size.y/2;
 
         chargedShot = false;
+        chargeReady = false;
         startChargedTime = 0;
         holdTime = 3f;
         
@@ -62,9 +64,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            spacePressed = true;
             if (chargedShot)
             {
+                SoundManager.PlaySound("chargeLoop");
                 startChargedTime = Time.time;
             }
             else
@@ -74,16 +76,36 @@ public class Player : MonoBehaviour
             
         }
 
-        if (Input.GetKeyUp(KeyCode.Space)){
-            startChargedTime = 0;
-            spacePressed = false;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (chargedShot)
+            {
+                Debug.Log(Time.time - startChargedTime);
+                if (Time.time - startChargedTime >= holdTime)
+                {
+                    SoundManager.StopSound("chargeLoop");
+                
+                    if(!chargeReady) 
+                        SoundManager.PlaySound("FullyCharged");
+                
+                    chargeReady = true;
+                }
+            }
+            
+
         }
 
-        if (Time.time - startChargedTime >= holdTime && spacePressed)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            startChargedTime = Time.time;
-            Fire();
-         }
+            SoundManager.StopSound("chargeLoop");
+            if (chargeReady)
+            {
+                Fire();
+            }
+            chargeReady = false;
+        }
+        
+        
         
     }
 

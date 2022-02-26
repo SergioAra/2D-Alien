@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip shortShot, chargedShot, bulletImpact, chargedImpact, theme, cowDead, dogDead, chickenDead;
+    public static AudioClip shortShot, chargedShot, bulletImpact, chargedImpact, theme, cowDead, dogDead, chickenDead, chargeLoop, fullyCharged;
     static AudioSource audioSrc;
+	private static string LastSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,8 @@ public class SoundManager : MonoBehaviour
         cowDead = Resources.Load<AudioClip>("cowDead");
         chickenDead = Resources.Load<AudioClip>("chickenDead");
         dogDead = Resources.Load<AudioClip>("dogDead");
-
+		chargeLoop = Resources.Load<AudioClip>("Chargeloop");
+		fullyCharged = Resources.Load<AudioClip>("FullyCharged");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -27,7 +29,9 @@ public class SoundManager : MonoBehaviour
         
     }
 
-    public static void PlaySound(string clip) { 
+    public static void PlaySound(string clip) 
+	{ 
+		LastSound = clip;
         switch (clip)
         {
             case "shortShot":
@@ -51,6 +55,12 @@ public class SoundManager : MonoBehaviour
             case "dogDead":
                 audioSrc.PlayOneShot(dogDead);
                 break;
+			case "chargeLoop":
+				audioSrc.PlayOneShot(chargeLoop);
+				break;
+			case "FullyCharged":
+				audioSrc.PlayOneShot(fullyCharged);
+				break;
             default:
                 audioSrc.PlayOneShot(shortShot);
                 break;
@@ -59,4 +69,10 @@ public class SoundManager : MonoBehaviour
         Debug.Log(clip);
         
     }
+	
+	public static void StopSound(string clip)
+	{
+		if(LastSound == clip)
+		audioSrc.Stop();
+	}	
 }
