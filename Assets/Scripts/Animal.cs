@@ -13,6 +13,8 @@ public class Animal : MonoBehaviour
 
     private float minX, maxX;
 
+    private bool dead = false;
+
     [SerializeField] [Range(-1,1)] private int movementDir = 1;
     
     [SerializeField] private int Health = 1;
@@ -50,13 +52,37 @@ public class Animal : MonoBehaviour
         {
             if (Health - 1 <= 0)
             {
+                dead = true;
                 Destroy(gameObject);
             }
             else
             {
                 Health--;
+                Debug.Log("-1");
             }
         }
-        
+
+        if (col.gameObject.tag == "ChargedBullet")
+        {
+            dead = true;
+            Destroy(gameObject);  
+        }
+
+        if (dead)
+        {
+            if (gameObject.tag == "Cow")
+            {
+                SoundManager.PlaySound("cowDead");
+            }
+            if (gameObject.tag == "Wolf")
+            {
+                SoundManager.PlaySound("dogDead");
+            }
+            if (gameObject.tag == "Chicken")
+            {
+                SoundManager.PlaySound("chickenDead");
+            }
+        }
+
     }
 }

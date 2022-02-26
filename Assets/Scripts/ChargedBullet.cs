@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class ChargedBullet : MonoBehaviour
 {
     private Animator anim;
     // Start is called before the first frame update
@@ -19,8 +19,8 @@ public class Bullet : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
-        SoundManager.PlaySound("bulletImpact");
-        anim.Play("yellowBulletAnimation");
-        Destroy(gameObject, 0.04f);
+        SoundManager.PlaySound("chargedImpact");
+        anim.Play("blueBulletAnimation");
+        Destroy(gameObject, 0.1f);
     }
 }

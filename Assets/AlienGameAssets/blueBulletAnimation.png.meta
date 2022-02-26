@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 67d32be68cfb4c841b5b60b7d3d05c65
+guid: 301c3528a6f2d5943b5053d3560e6cec
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -102,7 +102,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: blueBulletAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 67
+        width: 68
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 37, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ddfded8b2f472e48ba3fe8fd6fa1f34
+      internalID: -643431511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blueBulletAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 64
+        width: 82
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 39, z: 33, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5f1ff22bea157499662a540e41e81b
+      internalID: 271746439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blueBulletAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 61
+        width: 106
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 247385ef33b270b4f82710a9db112930
+      internalID: -722745297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blueBulletAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 58
+        width: 68
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c918c29edc4de0346888298816d43d5d
+      internalID: 1059557198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -113,7 +197,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      blueBulletAnimation_1: 271746439
+      blueBulletAnimation_2: -722745297
+      blueBulletAnimation_3: 1059557198
+      blueBulletAnimation_0: -643431511
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

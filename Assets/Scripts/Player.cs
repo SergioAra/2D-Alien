@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed = 20f;
 
-    private float minX, minY, maxX, maxY;
+    private float minX, minY, maxX, maxY, startChargedTime, holdTime;
+
+    private bool chargedShot, spacePressed;
     
     private SpriteRenderer mySprite;
 
     [SerializeField] private GameObject bullet;
-    
+    [SerializeField] private GameObject bulletCharged;
+
     [SerializeField] private float fireDelay = 1;
 
     private float lastFireTime = 0;
@@ -30,6 +33,10 @@ public class Player : MonoBehaviour
         maxX = topRightCorner.x - mySprite.bounds.size.x/2;
         minY = bottomLeftCorner.y + mySprite.bounds.size.y/2;
         maxY = topRightCorner.y - mySprite.bounds.size.y/2;
+
+        chargedShot = false;
+        startChargedTime = 0;
+        holdTime = 3f;
         
         //Debug.Log("Min x: "+ minX);
     }
@@ -48,18 +55,54 @@ public class Player : MonoBehaviour
 
         );
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            chargedShot = !chargedShot;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Fire();
+            spacePressed = true;
+            if (chargedShot)
+            {
+                startChargedTime = Time.time;
+            }
+            else
+            {
+                Fire();
+            }
+            
         }
+
+        if (Input.GetKeyUp(KeyCode.Space)){
+            startChargedTime = 0;
+            spacePressed = false;
+        }
+
+        if (Time.time - startChargedTime >= holdTime && spacePressed)
+        {
+            startChargedTime = Time.time;
+            Fire();
+         }
+        
     }
 
     void Fire()
     {
         if (Time.time > fireDelay + lastFireTime)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            if (chargedShot)
+            {
+                SoundManager.PlaySound("chargedShot");
+                Instantiate(bulletCharged, transform.position, transform.rotation);
+            }
+            else
+            {
+                SoundManager.PlaySound("shortShot");
+                Instantiate(bullet, transform.position, transform.rotation);
+            }
             lastFireTime = Time.time;
+            
         }
     }
 }
