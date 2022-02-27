@@ -66,7 +66,7 @@ public class SoundManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log(clip);
+        //Debug.Log(clip);
         
     }
 	

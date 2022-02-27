@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class Animal : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Animal : MonoBehaviour
     [SerializeField] [Range(-1,1)] private int movementDir = 1;
     
     [SerializeField] private int Health = 1;
+
+    private static int aliveCounter = 0 ;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,11 @@ public class Animal : MonoBehaviour
         
         minX = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).x + mySprite.bounds.size.x/2;
         maxX = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)).x - mySprite.bounds.size.x/2;
+        
+        if(aliveCounter <= 0)
+        {
+            aliveCounter = FindObjectsOfType<Animal>().Length;
+        }
     }
 
     // Update is called once per frame
@@ -58,7 +67,7 @@ public class Animal : MonoBehaviour
             else
             {
                 Health--;
-                Debug.Log("-1");
+                //Debug.Log("-1");
             }
         }
 
@@ -81,6 +90,12 @@ public class Animal : MonoBehaviour
             if (gameObject.tag == "Chicken")
             {
                 SoundManager.PlaySound("chickenDead");
+            }
+            
+            aliveCounter--;
+            if (aliveCounter <= 0)
+            {
+                SceneManager.LoadScene("Level") ;
             }
         }
 

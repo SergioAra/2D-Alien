@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
         {
             if (chargedShot)
             {
-                Debug.Log(Time.time - startChargedTime);
                 if (Time.time - startChargedTime >= holdTime)
                 {
                     SoundManager.StopSound("chargeLoop");
